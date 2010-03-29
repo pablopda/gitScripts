@@ -2,7 +2,7 @@
 #GIT_DOMAIN=arkat@localhost
 GIT_DOMAIN=lvkgit@git.lavandaink.com.ar
 GIT_DIR=git.lavandaink.com.ar
-GIT_LOCAL_DIR=/home/arkat/lvk/reposborrar
+GIT_LOCAL_DIR=/home/arkat/lvk/repos
 # REPOS=: `ssh $GIT_DOMAIN 'ls '$GIT_DIR' | grep .git' ` 
 
 #funcionts
@@ -65,5 +65,13 @@ case $1 in
 		getOneRepo "$@";;
   "-l" | "--list")
 		echo " listando repositorios"
+  		listRepos "$@";;
+  "")
+		echo "las opciones validas son las siguientes:"
+		echo "-a | --all : Obtiene todos los repositorios exitentes en el servidor"
+		echo "-g <NombreDelRepo> | --one <NombreDelRepo> : Obtiene el repostirio <NombreDelRepo>"
+		echo "-l | --list : Lista los repositorios disponibles en el servidor"
+		echo "------"
+		echo "Los repositorios disponibles son los siguientes:"
 		listRepos "$@";;
 esac
