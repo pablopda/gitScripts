@@ -2,7 +2,7 @@
 #GIT_DOMAIN=arkat@localhost
 GIT_DOMAIN=lvkgit@git.lavandaink.com.ar
 GIT_DIR=git.lavandaink.com.ar
-GIT_LOCAL_DIR=/home/arkat/lvk/repos
+GIT_LOCAL_DIR=$HOME/lvk/repos
 # REPOS=: `ssh $GIT_DOMAIN 'ls '$GIT_DIR' | grep .git' ` 
 
 #funcionts
