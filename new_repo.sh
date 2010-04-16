@@ -3,7 +3,7 @@
 #GIT_DOMAIN=arkat@localhost
 GIT_DOMAIN=lvkgit@git.lavandaink.com.ar
 GIT_DIR=git.lavandaink.com.ar
-GIT_LOCAL_DIR=/home/arkat/lvk/proyects/
+GIT_LOCAL_DIR=$HOME/lvk/proyects/
 
 #Functions 
 checkargs()
