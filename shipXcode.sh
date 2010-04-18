@@ -1,11 +1,12 @@
 #!/bin/sh -x
 # git name-rev is fail
 CURRENT=`git branch | grep '\*' | awk '{print $2}'`
-# '/Users/arkatbrown/lvk/proyects/gitScripts'
-#GITPATH=`pwd|rev|awk -F \/ '{print $1}'|rev`
-GITNAME=`basename $PWD`
-#check if projet compila
 
+#GITPATH=`pwd|rev|awk -F \/ '{print $1}'|rev`
+
+GITNAME=`basename $PWD`
+
+#check if projet compila
 echo $GITNAME
 mkdir -p tmp/
 cd tmp
@@ -19,14 +20,14 @@ xcodebuild 2> error.log > /dev/null
 
 if [ ! -s "error.log" ]; then
         echo "all ok"
-        exit
+	cd ../../
+	yes | rm -R tmp	
 else
         echo "Compilation error"
         echo "aborting ship"
-        exit
 fi
 
-cd ..
+#exit
 
 git checkout master
 git merge ${CURRENT}
