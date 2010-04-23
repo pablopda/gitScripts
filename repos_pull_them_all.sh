@@ -1,7 +1,8 @@
 #!/bin/sh
-GIT_DOMAIN=lvkgit@git.lavandaink.com.ar
-GIT_DIR=git.lavandaink.com.ar
-GIT_LOCAL_DIR=$HOME/lvk/reposborrar
+#GIT_DOMAIN=lvkgit@git.lavandaink.com.ar
+#GIT_DIR=git.lavandaink.com.ar
+#GIT_LOCAL_DIR=$HOME/lvk/reposborrar
+source config.cfg
 
 if [ ! -d $GIT_LOCAL_DIR ]
   then

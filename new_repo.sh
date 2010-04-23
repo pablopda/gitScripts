@@ -1,9 +1,10 @@
 #!/bin/sh
 # For lvk interal use only
-#GIT_DOMAIN=arkat@localhost
-GIT_DOMAIN=lvkgit@git.lavandaink.com.ar
-GIT_DIR=git.lavandaink.com.ar
-GIT_LOCAL_DIR=$HOME/lvk/proyects/
+#GIT_DOMAIN=lvkgit@git.lavandaink.com.ar
+#GIT_DIR=git.lavandaink.com.ar
+#GIT_LOCAL_DIR=$HOME/lvk/proyects/
+
+source config.cfg
 
 #Functions 
 checkargs()
