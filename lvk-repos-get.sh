@@ -1,16 +1,10 @@
 #!/bin/sh
-#GIT_DOMAIN=arkat@localhost
 # REPOS=: `ssh $GIT_DOMAIN 'ls '$GIT_DIR' | grep .git' ` 
 
-#GIT_DOMAIN=lvkgit@git.lavandaink.com.ar
-#GIT_DIR=git.lavandaink.com.ar
-#GIT_LOCAL_DIR=$HOME/lvk/repos
+#functions
 
-source config.cfg
-
-
-#funcionts
-checkargs()
+#Check arguments and existence of local directory of git's repository
+checkArgs()
 {
   if [ ! -d $GIT_LOCAL_DIR ]
   then
@@ -29,6 +23,21 @@ checkargs()
       echo "no esta implementado el control sobre la existencia del repositorio solicitado"
       echo "ejecute repos_get --list para obtener una lista de los repositorios"
   fi
+}
+
+# Check if configuration file exist
+checkConfig()
+{
+if [ ! -e "/home/arkat/.lvk/.lvkgit.cfg" ]; then
+   if [ ! -e ".lvkgit.cfg" ]; then
+    echo "!!!!! ---- !!!!"
+    echo "Please run lvk-initial-configuration.sh before start using the scripts"
+    echo "!!!!! ---- !!!!"
+    exit
+    else
+        echo "!!!!! Using local '.lvkgit.cfg' insted of '$HOME/.lvk/.lvkgit.cfg' "
+    fi
+fi
 }
 
 getAllRepos()
@@ -58,7 +67,13 @@ getOneRepo()
   exit
 
 }
-checkargs "$@"
+
+#End functions
+
+# Body of script
+
+checkConfig "$@"
+checkArgs "$@"
 
 case $1 in
   "-a"| "--all")
@@ -79,3 +94,5 @@ case $1 in
 		echo "Los repositorios disponibles son los siguientes:"
 		listRepos "$@";;
 esac
+
+# End body of script
