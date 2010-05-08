@@ -1,4 +1,8 @@
 #!/bin/sh
+# -x for debbuging only
+# For lvk interal use only
+# Author arkatPDA @ lvk 
+
 # REPOS=: `ssh $GIT_DOMAIN 'ls '$GIT_DIR' | grep .git' ` 
 
 #functions
@@ -28,7 +32,7 @@ checkArgs()
 # Check if configuration file exist
 checkConfig()
 {
-if [ ! -e "/home/arkat/.lvk/.lvkgit.cfg" ]; then
+if [ ! -e "$HOME/.lvk/.lvkgit.cfg" ]; then
    if [ ! -e ".lvkgit.cfg" ]; then
     echo "!!!!! ---- !!!!"
     echo "Please run lvk-initial-configuration.sh before start using the scripts"

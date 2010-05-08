@@ -1,11 +1,15 @@
 #!/bin/sh
+# -x for debbuging only
+# For lvk interal use only
+# Author arkatPDA @ lvk 
+
 
 #Functions:
 
 # Check if configuration file exist
 checkConfig()
 {
-if [ ! -e "/home/arkat/.lvk/.lvkgit.cfg" ]; then
+if [ ! -e "$HOME/.lvk/.lvkgit.cfg" ]; then
    if [ ! -e ".lvkgit.cfg" ]; then
     echo "!!!!! ---- !!!!"
     echo "Please run lvk-initial-configuration.sh before start using the scripts"

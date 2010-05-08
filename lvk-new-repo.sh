@@ -32,7 +32,7 @@ fi
 # Check if configuration file exist
 checkConfig()
 {
-if [ ! -e "/home/arkat/.lvk/.lvkgit.cfg" ]; then
+if [ ! -e "$HOME.lvk/.lvkgit.cfg" ]; then
    if [ ! -e ".lvkgit.cfg" ]; then
     echo "!!!!! ---- !!!!"
     echo "Please run lvk-initial-configuration.sh before start using the scripts"

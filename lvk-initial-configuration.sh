@@ -1,11 +1,15 @@
 #!/bin/bash
+# -x for debbuging only
+# For lvk interal use only
+# Author arkatPDA @ lvk 
+
 #Initial Configuration
 
 # Check if configuration file exist if not make a new one with default configuration
 
 checkConfig()
 {
-if [ -e "/home/arkat/.lvk/.lvkgit.cfg" ]; then
+if [ -e "$HOME/.lvk/.lvkgit.cfg" ]; then
     echo "Using configuration file ${HOME}/.lvk/.lvkgit.cfg "
 else
       mkdir -p ~/.lvk
