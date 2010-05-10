@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 # -x for debbuging only
 # For lvk interal use only
 # Author arkatPDA @ lvk 
@@ -32,17 +32,26 @@ checkArgs()
 # Check if configuration file exist
 checkConfig()
 {
-if [ ! -e "$HOME/.lvk/.lvkgit.cfg" ]; then
-   if [ ! -e ".lvkgit.cfg" ]; then
+ if [ ! -e "$HOME/.lvk/.lvkgit.cfg" ]; then
     echo "!!!!! ---- !!!!"
     echo "Please run lvk-initial-configuration.sh before start using the scripts"
     echo "!!!!! ---- !!!!"
     exit
-    else
-        echo "!!!!! Using local '.lvkgit.cfg' insted of '$HOME/.lvk/.lvkgit.cfg' "
-    fi
-fi
+ fi
 }
+
+loadConfig()
+{
+ if [ ! -e "./.lvkgit.cfg" ]; then
+    . $HOME/.lvk/.lvkgit.cfg
+ else
+   echo "\n!!!!!"
+   echo " Using local '.lvkgit.cfg' insted of '$HOME/.lvk/.lvkgit.cfg' "
+   echo "!!!!! \n"
+   . ./.lvkgit.cfg
+ fi
+}
+
 
 getAllRepos()
 {
@@ -77,6 +86,7 @@ getOneRepo()
 # Body of script
 
 checkConfig "$@"
+loadConfig "$@"
 checkArgs "$@"
 
 case $1 in
