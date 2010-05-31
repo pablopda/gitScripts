@@ -4,9 +4,11 @@
 
 #  Avoid unset variables act as empty strings and force scritp to abort if one
 # is used
-set -o nounset
+# set -o nounset
 
 #Initial Configuration
+
+PROFILE="ERROR"
 
 # checkConfig Check if configuration file exist
 # if not make a new one with default configuration
@@ -18,22 +20,7 @@ if [ -e "$HOME/.lvk/.lvkgit.cfg" ]; then
     echo "Please check yout ${HOME}/.lvk/.lvkgit.cfg against"
     echo "repository lvkgit.cfg for missing constant declarations"
 else
-    mkdir -p ~/.lvk
-    touch ~/.lvk/.lvkgit.cfg
-    echo '
-# If you update gitScripts allways check new example configuration and correc
-# this if is needed
-readonly GIT_DOMAIN="lvkgit@git.lavandaink.com.ar"
-readonly GIT_DIR="git.lavandaink.com.ar"
-readonly GIT_LOCAL_DIR="$HOME/lvk/repos"
-
-# Set where we put lvk binary git tools (and with that the man pages)
-readonly GIT_SCRIPTS_DIR="$HOME/.lvk/gitScripts"
-
-#Debug boolean variable
-readonly LVKDEBUG=0
-
-' >> ~/.lvk/.lvkgit.cfg
+	insertInitialConfig "#@"
     echo "!!!!! ---- !!!!"
     echo "the lvkgit configuration wasn't exist, so we make it with the
 default configuration"
@@ -42,6 +29,55 @@ default configuration"
       
 fi
 }
+
+insertInitialConfig(){
+    mkdir -p ~/.lvk
+	touch ~/.lvk/.lvkgit.cfg
+	echo '
+	# If you update gitScripts allways check new example configuration and correc
+	# this if is needed
+	readonly GIT_DOMAIN="lvkgit@git.lavandaink.com.ar"
+	readonly GIT_DIR="git.lavandaink.com.ar"
+	readonly GIT_LOCAL_DIR="$HOME/lvk/repos"
+	
+	# Set where we put lvk binary git tools (and with that the man pages)
+	readonly GIT_SCRIPTS_DIR="$HOME/.lvk/gitScripts"
+
+	#Debug boolean variable
+	readonly LVKDEBUG=0
+
+	' >> ~/.lvk/.lvkgit.cfg
+	
+	if [ "`uname`" = "Linux" ]; then
+		PROFILE=".bashrc"
+	
+	fi
+	if [ "`uname`" = "Darwin" ]; then
+		PROFILE=".profile"
+	fi
+	#agrego el path para que sean ejecutables los scripts y accesibles las man
+# 	echo '
+# function pathmunge () {
+# if [ -d \$1 ] && ! echo $PATH | /bin/egrep -q "(^|:)\$1(\$|:)"
+# then
+#         if [ "\$2" = "after" ]
+#         then
+#                 PATH=$PATH:\$1
+#         else
+#                 PATH=\$1:\$PATH
+#         fi
+# fi
+# }
+# 
+# pathmunge $HOME/.lvk/gitScripts
+# 	' >> ${HOME}/${PROFILE}
+	echo '
+	export PATH=$HOME/.lvk/gitScripts:$PATH	
+	export MANPATH=$HOME/.lvk/gitScripts/man:$MANPATH
+	' >> ${HOME}/${PROFILE}
+
+}
+
 
 loadConfig()
 {
@@ -64,28 +100,12 @@ if [ $LVKDEBUG -eq 1 ]; then
 fi
 
 
-#agrego el path para que sean ejecutables los scripts y accesibles las man
-cat >>${HOME}/.bashrc <<eof
-function pathmunge () {
-if [ -d \$1 ] && ! echo $PATH | /bin/egrep -q "(^|:)\$1(\$|:)"
-then
-        if [ "\$2" = "after" ]
-        then
-                PATH=$PATH:\$1
-        else
-                PATH=\$1:\$PATH
-        fi
-fi
-}
 
-pathmunge ${HOME}/.lvk/gitScripts
-
-eof
 
 
 # End body of script
 
-: <<'END_OF_DOCS'
+: << 'END_OF_DOCS'
 
 =head1 NAME
 

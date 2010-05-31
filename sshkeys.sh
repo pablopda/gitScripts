@@ -36,36 +36,37 @@ chmod go-rwx ~/.ssh/*
 
 # /TODO: checkear si existe la carpeta antes de copiarlo ¿?
 if [ ! -e ~/.ssh/${KEY_NAME}  ]; then
-  echo "No existe ~/.ssh/${KEY_NAME}"
+  echo "No existe $HOME/.ssh/${KEY_NAME}"
   exit
 fi
 
-# Copiamos la clave publica al "llavero" del servidor
-# /TODO : Chequear que existe el archivoy carpeta en el servidor ?
-# ssh $USER_DOMAIN mkdir -p .ssh
-# cat .ssh/id_rsa.pub | ssh $USER_DOMAIN 'cat >> .ssh/authorized_keys'
-# inventaron un comando para no hacer tanto lio!!!
-ssh-copy-id -i ~/.ssh/${KEY_NAME}.pub $USER_DOMAIN
-
-# MUST INSTALL keychain
+# Linux configuration
 if [ "`uname`" = "Linux" ]; then
-  echo "trying to install keychain"
-  sudo aptitude install keychain ssh-askpass
-else
-  echo "Install manually keychain and put "
-  echo "keychain ${KEY_NAME}"
-  echo ". ~/.keychain/`uname -n`-sh"
-  echo "in your .bashrc or equivalent"
-  exit
+	# Copiamos la clave publica al "llavero" del servidor
+	# ssh $USER_DOMAIN mkdir -p .ssh
+	# cat .ssh/id_rsa.pub | ssh $USER_DOMAIN 'cat >> .ssh/authorized_keys'
+	# inventaron un comando para no hacer tanto lio!!! (solo funciona en Linux)
+	ssh-copy-id -i ~/.ssh/${KEY_NAME}.pub $USER_DOMAIN
+	echo "trying to install keychain"
+	sudo aptitude install keychain ssh-askpass
+	# Configuro  keychain para 
+	# TODO: ver porque los cat >> no funcionan en macosx
+	#cat >> ${HOME}/.bashrc << eof
+	echo '
+	# BEGIN LVK Keychain configuration
+	keychain ${KEY_NAME}
+	. $HOME/.keychain/`uname -n`-sh
+	# ENDS LVK Keychain configuration
+	' >> ${HOME}/.bashrc
+
 fi
 
-# Configuro  keychain para 
-cat >> ${HOME}/.bashrc << eof
+# MacOSX configuration
+if [ "`uname`" = "Darwin" ]; then
+	# Copiamos la clave publica al "llavero" del servidor
+	ssh $USER_DOMAIN mkdir -p .ssh
+	cat $HOME/.ssh/${KEY_NAME}.pub | ssh $USER_DOMAIN 'cat >> .ssh/authorized_keys'
 
-# BEGIN Keychain configuration
-keychain ${KEY_NAME}
-. ~/.keychain/`uname -n`-sh
-
-# ENDS Keychain configuration
-
-eof
+	#looks like macosx already have keychain installed
+	ssh-add -K $HOME/.ssh/${KEY_NAME}
+fi
