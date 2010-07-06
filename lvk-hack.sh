@@ -15,6 +15,9 @@ set -o nounset
 
 # git name-rev is fail
 CURRENT=`git branch | grep '\*' | awk '{print $2}'`
+if [ ${CURRENT} = "master" ]; then
+  echo "you must hack branch not into master"
+fi
 git commit -a
 git checkout master
 git pull origin master
