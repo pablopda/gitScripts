@@ -53,7 +53,7 @@ for repo in `ls`
 do
 	echo 'Pull (ing) '$repo' ...'
 	cd $repo 
-	git pull ssh://$GIT_DOMAIN/~/$GIT_DIR/$repo
+	git pull ssh://$GIT_DOMAIN/~/$GIT_DIR/$repo master
 	cd ..
 done
 
