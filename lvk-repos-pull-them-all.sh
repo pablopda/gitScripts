@@ -52,8 +52,16 @@ cd $GIT_LOCAL_DIR
 for repo in `ls`
 do
 	echo 'Pull (ing) '$repo' ...'
-	cd $repo 
-	git pull ssh://$GIT_DOMAIN/~/$GIT_DIR/$repo master
+	cd $repo
+	CURRENT=`git branch | grep '\*' | awk '{print $2}'`
+	if [ ${CURRENT} = "master" ]; then
+  		echo "you must hack branch not into master"
+	fi
+	git checkout master
+	git pull origin master
+	git checkout ${CURRENT}
+	#git pull ssh://$GIT_DOMAIN/~/$GIT_DIR/$repo master
+	#hack.sh
 	cd ..
 done
 
