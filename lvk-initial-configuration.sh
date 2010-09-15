@@ -34,19 +34,18 @@ insertInitialConfig(){
     mkdir -p ~/.lvk
 	touch ~/.lvk/.lvkgit.cfg
 	echo '
-	# If you update gitScripts allways check new example configuration and correc
-	# this if is needed
-	readonly GIT_DOMAIN="lvkgit@git.lavandaink.com.ar"
-	readonly GIT_DIR="git.lavandaink.com.ar"
-	readonly GIT_LOCAL_DIR="$HOME/lvk/repos"
-	
-	# Set where we put lvk binary git tools (and with that the man pages)
-	readonly GIT_SCRIPTS_DIR="$HOME/.lvk/gitScripts"
+# If you update gitScripts allways check new example configuration and correc
+# this if is needed
+readonly GIT_DOMAIN="lvkgit@git.lavandaink.com.ar"
+readonly GIT_DIR="git.lavandaink.com.ar"
+readonly GIT_LOCAL_DIR="$HOME/lvk/repos"
 
-	#Debug boolean variable
-	readonly LVKDEBUG=0
+# Set where we put lvk binary git tools (and with that the man pages)
+readonly GIT_SCRIPTS_DIR="$HOME/.lvk/gitScripts"
 
-	' >> ~/.lvk/.lvkgit.cfg
+#Debug boolean variable
+readonly LVKDEBUG=0
+' >> ~/.lvk/.lvkgit.cfg
 	
 	if [ "`uname`" = "Linux" ]; then
 		PROFILE=".bashrc"
@@ -72,9 +71,9 @@ insertInitialConfig(){
 # pathmunge $HOME/.lvk/gitScripts
 # 	' >> ${HOME}/${PROFILE}
 	echo '
-	export PATH=$HOME/.lvk/gitScripts:$PATH	
-	export MANPATH=$HOME/.lvk/gitScripts/man:$MANPATH
-	' >> ${HOME}/${PROFILE}
+export PATH=$HOME/.lvk/gitScripts:$PATH	
+export MANPATH=$HOME/.lvk/gitScripts/man:$MANPATH
+' >> ${HOME}/${PROFILE}
 
 }
 
