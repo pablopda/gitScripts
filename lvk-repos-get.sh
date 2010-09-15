@@ -66,6 +66,7 @@ loadConfig()
 
 getAllRepos()
 {
+  cd $GIT_LOCAL_DIR
   for repo in `ssh $GIT_DOMAIN ls $GIT_DIR | grep .git`
   do
     echo 'Cloning '$repo' ...'
