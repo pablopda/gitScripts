@@ -1,7 +1,5 @@
 #!/bin/sh 
-
-
-if [$LVKDEBUG]; then
+if [ $LVKDEBUG ]; then
   set -x
 fi
 # For lvk interal use only
