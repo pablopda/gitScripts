@@ -34,7 +34,7 @@ chmod go-w ~/
 chmod 700 ~/.ssh
 chmod go-rwx ~/.ssh/*
 
-# /TODO: checkear si existe la carpeta antes de copiarlo ¿?
+# checkea si existe la carpeta antes de copiar
 if [ ! -e ~/.ssh/${KEY_NAME}  ]; then
   echo "No existe $HOME/.ssh/${KEY_NAME}"
   exit
@@ -52,12 +52,12 @@ if [ "`uname`" = "Linux" ]; then
 	# Configuro  keychain para 
 	# TODO: ver porque los cat >> no funcionan en macosx
 	#cat >> ${HOME}/.bashrc << eof
-	echo '
+	echo "
 	# BEGIN LVK Keychain configuration
 	keychain ${KEY_NAME}
 	. $HOME/.keychain/`uname -n`-sh
 	# ENDS LVK Keychain configuration
-	' >> ${HOME}/.bashrc
+	" >> ${HOME}/.bashrc
 
 fi
 
