@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh 
 # For lvk interal use only
 # Author arkatPDA @ lvk 
 
@@ -48,18 +48,26 @@ if [ ! -d $GIT_LOCAL_DIR ]
       echo "the folder '$GIT_LOCAL_DIR' doesnt exist"
       exit
 fi
+
+# For each repositorie in GIT_LOCAL_REPO pull the origin master into local
+# master branch
+
 cd $GIT_LOCAL_DIR
-for repo in `ls`
+
+# TODO : impruve (maybe) search only for directories with .git sub directory
+for repo in `ls -d */` 				# `ls -d */` list only directories
 do
 	echo 'Pull (ing) '$repo' ...'
 	cd $repo
 	CURRENT=`git branch | grep '\*' | awk '{print $2}'`
-	if [ ${CURRENT} = "master" ]; then
-  		echo "you must hack branch not into master"
+	if [ ! ${CURRENT} = "master" ]; then
+		git checkout master
+		git pull origin master
+		git checkout ${CURRENT}
+	else
+		# pull from origin the master branch into current branch
+		git pull origin master
 	fi
-	git checkout master
-	git pull origin master
-	git checkout ${CURRENT}
 	#git pull ssh://$GIT_DOMAIN/~/$GIT_DIR/$repo master
 	#hack.sh
 	cd ..
@@ -67,15 +75,12 @@ done
 
 # End body of script
 
-# End body of script
-
 : <<'END_OF_DOCS'
 
 =head1 NAME
 
-lvk-repos-pull-them-all.sh - Script to pull all yours lvk-git repos
-allready cloned from the server into your repos directory 
-remote server
+lvk-repos-pull-them-all.sh - Script to pull all master branch of yours 
+lvk-git repos allready cloned from the server into your repos directory 
 
 =head1 SYNOPSIS
 
