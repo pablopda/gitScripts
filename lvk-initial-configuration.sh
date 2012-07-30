@@ -1,6 +1,19 @@
-#!/bin/sh
-# For lvk interal use only
-# Author arkatPDA @ lvk 
+#!/bin/sh 
+#
+# Author Pablo Perez De Angelis
+# Copyright (C) Lvk Labs
+ 
+# This file is part of gitScripts.
+ 
+# gitScripts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+ 
+# gitScripts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 
 #  Avoid unset variables act as empty strings and force scritp to abort if one
 # is used
@@ -23,8 +36,8 @@ else
 	insertInitialConfig "#@"
     echo "!!!!! ---- !!!!"
     echo "the lvkgit configuration wasn't exist, so we make it with the
-default configuration"
-    echo "please edit ~/.lvk/.lvkgit.cfg to adjust your local configuration"
+default values"
+    echo "please edit ~/.lvk/.lvkgit.cfg to adjust your local and remote configuration"
     echo "!!!!! ---- !!!!"
       
 fi
@@ -36,8 +49,8 @@ insertInitialConfig(){
 	echo '
 # If you update gitScripts allways check new example configuration and correc
 # this if is needed
-readonly GIT_DOMAIN="lvkgit@git.lavandaink.com.ar"
-readonly GIT_DIR="git.lavandaink.com.ar"
+readonly GIT_DOMAIN="user@yourdomain"
+readonly GIT_DIR="directory_where_store_the_repos"
 readonly GIT_LOCAL_DIR="$HOME/lvk/repos"
 
 # Set where we put lvk binary git tools (and with that the man pages)
